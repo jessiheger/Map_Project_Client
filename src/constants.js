@@ -1,1 +1,1 @@
-module.exports.SERVER_URL = "https://travel-project-server.herokuapp.com"
+module.exports.SERVER_URL = "https://travel-project-jh.herokuapp.com"
