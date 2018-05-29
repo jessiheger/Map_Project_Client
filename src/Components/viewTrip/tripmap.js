@@ -8,7 +8,7 @@ class TripMap extends Component {
   constructor(props) {
   super(props);
     this.state = {
-      centerLong: 41.168,
+      centerLong: 41.167,
       centerLat: 17.941
       }
     }
