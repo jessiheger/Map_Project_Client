@@ -21,8 +21,6 @@ class ViewTripContainer extends Component {
 	componentDidMount = () => {
 		axios.get(SERVER_URL+'/trip/' + this.props.match.params.tripId)
 		.then(result => {
-			console.log("success, component DID MOUNT. Here\'s the axios request result:", result.data.name);
-			console.log('destinations found: ', result.data.destinations);
 			this.setState({ tripDestinations: result.data.destinations, tripInfo: result.data.name});
 		})
 		.catch(err => {
@@ -44,7 +42,7 @@ class ViewTripContainer extends Component {
 		      				<DestinationSection tripDestinations={this.state.tripDestinations} />
 		    			</Col>
 		   				 <Col md={6} mdPull={6}>
-		      				<TripMap />
+		      				<TripMap ripDestinations={this.state.tripDestinations} />
 		    			</Col>
 		  			</Row>
 		  		</Grid>
