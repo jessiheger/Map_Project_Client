@@ -14,7 +14,7 @@ class ViewTripContainer extends Component {
 		console.log('params', match.params);
 		this.state = {
 			tripInfo: '',
-			tripDestinations: ''
+			tripDestinations: []
 		}
 	}
 
@@ -42,7 +42,7 @@ class ViewTripContainer extends Component {
 		      				<DestinationSection tripDestinations={this.state.tripDestinations} />
 		    			</Col>
 		   				 <Col md={6} mdPull={6}>
-		      				<TripMap ripDestinations={this.state.tripDestinations} />
+		      				<TripMap tripDestinations={this.state.tripDestinations} />
 		    			</Col>
 		  			</Row>
 		  		</Grid>

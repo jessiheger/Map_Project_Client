@@ -4,8 +4,8 @@ import axios from 'axios';
 import { SERVER_URL } from '../../constants';
 
 const MapboxAccessToken = process.env.REACT_APP_MAPBOX_KEY;
-const GoogleKey = process.env.REACT_APP_GOOGLE_KEY;
-const SmallMap = ReactMapboxGL({ accessToken:MapboxAccessToken});
+const MyKey = process.env.REACT_APP_MY_KEY;
+const SmallMap = ReactMapboxGL({ accessToken:MapboxAccessToken });
 
 class TripMap extends Component {
   constructor(props) {
@@ -19,11 +19,12 @@ class TripMap extends Component {
 
   componentDidMount () {
     let destArr = this.props.tripDestinations || [];
-    let firstObj = destArr[0]
-    console.log('firstObj is', firstObj)
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=big+ben+london+great+britain&key=${GoogleKey}`)
+    console.log(this.props.tripDestinations)
+    // let firstObj = destArr[0]
+    // console.log('firstObj is', firstObj)
+    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=big+ben+london+great+britain&key=${MyKey}`)
       .then(res => {
-        console.log('Connected to Google Geocoder');
+        // console.log('Connected to Google Geocoder', res);
         this.setState({ 
           lng: res.data.results[0].geometry.location.lng, 
           lat: res.data.results[0].geometry.location.lat 
