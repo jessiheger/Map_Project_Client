@@ -11,7 +11,7 @@ class ViewTripContainer extends Component {
 	constructor(props) {
 		super(props);
 		const {match} = this.props;
-		console.log('params', match.params);
+		// console.log('params', match.params);
 		this.state = {
 			tripInfo: '',
 			tripDestinations: []

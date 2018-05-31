@@ -5,7 +5,7 @@ import axios from 'axios';
 class ViewTripHeader extends Component {
 	constructor(props) {
 		super(props)
-		console.log("this.props.tripInfo", this.props.tripInfo);
+		// console.log("this.props.tripInfo", this.props.tripInfo);
 		// console.log("this.props.tripId:", this.props.tripId)
 	}
 

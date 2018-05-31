@@ -8,7 +8,7 @@ class DestinationSection extends Component {
     render() {
         let destArr = this.props.tripDestinations || [];
         let mappedDestinations = destArr.map( (item, idx) => {
-            return <p key={idx}>{item.landmark} ({item.country})</p>
+            return <p key={idx}>{item.landmark} {item.city}, {item.state} ({item.country})</p>
         });
             return (
                 <div className="DestinationContent">

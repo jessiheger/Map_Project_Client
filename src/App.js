@@ -34,7 +34,7 @@ class App extends Component {
     console.log('get user');
     let token = localStorage.getItem('mernToken');
     if(token){
-      console.log('token found in LS', token)
+      // console.log('token found in LS', token)
       axios.post(SERVER_URL + '/auth/me/from/token', {
         headers: { 'Authorization': `Bearer ${token}` }
       })

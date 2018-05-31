@@ -13,33 +13,46 @@ class TripMap extends Component {
     this.state = {
       addedDest: '',
       lat: null,
-      lng: null
+      lng: null,
+      tripDestinations: this.props.tripDestinations
       }
     }
 
-  componentDidMount () {
-    let destArr = this.props.tripDestinations || [];
-    console.log(this.props.tripDestinations)
-    // let firstObj = destArr[0]
-    // console.log('firstObj is', firstObj)
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=big+ben+london+great+britain&key=${MyKey}`)
-      .then(res => {
-        // console.log('Connected to Google Geocoder', res);
-        this.setState({ 
-          lng: res.data.results[0].geometry.location.lng, 
-          lat: res.data.results[0].geometry.location.lat 
-        }), () => {
-          axios.put(SERVER_URL + `/${this.props.tripDestinations}`, this.state)
-          .then(res => {
-            console.log('PUT request worked')
-          .catch(err => {
-              console.log('PUT request failed:', err);
+  componentWillReceiveProps = () => {
+    console.log(this)
+    if (this.props.tripDestinations.length > 0) {
+      let landmarkNoSpaces = this.props.tripDestinations[0].landmark.replace(' ','+');
+      console.log(landmarkNoSpaces);
+      let cityNoSpaces = this.props.tripDestinations[0].city.replace(' ','+');
+      console.log(cityNoSpaces);
+      // // let countryNoSpaces = this.props.tripDestinations[0].country.replace(' ','+');
+      // let fullDestInfo = cityNoSpaces+'+'+state;
+      // console.log('fullDestInfo', fullDestInfo);
+      let mapURL = ''
+      if (this.props.tripDestinations[0].landmark) {
+        mapURL = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${landmarkNoSpaces}+${cityNoSpaces}&key=${MyKey}`)
+      } 
+      else {
+        mapURL = axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${cityNoSpaces}&key=${MyKey}`)
+      }
+      (mapURL).then(res => {
+          this.setState({ 
+            lng: res.data.results[0].geometry.location.lng, 
+            lat: res.data.results[0].geometry.location.lat 
+          }), () => {
+            axios.put(SERVER_URL + `/${this.props.tripDestinations}`, this.state)
+            .then(res => {
+              console.log('PUT request worked')
+            .catch(err => {
+                console.log('PUT request failed:', err);
+              })
             })
-          })
-        }
+          }
         console.log('coordinates are:', this.state.lng, this.state.lat)
       })      
+    }
   }
+
   render() {
     return (
       <div>
